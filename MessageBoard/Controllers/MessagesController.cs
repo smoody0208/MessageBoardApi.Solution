@@ -19,16 +19,17 @@ namespace MessageBoard.Controllers
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Message>> Get(DateTime date)
+    public ActionResult<IEnumerable<Message>> Get() // DateTime date
     {
-      var query = _db.Messages.AsQueryable();
+      // var query = _db.Messages.AsQueryable();
       
-      if (date != null)
-      {
-        query = query.Where(entry => entry.DatePosted == date);
-      }
+      // if (date != null)
+      // {
+      //   query = query.Where(entry => entry.DatePosted == date);
+      // }
 
-      return query.ToList();
+      // return query.ToList();
+      return _db.Messages.ToList();
     }
 
     [HttpPost]

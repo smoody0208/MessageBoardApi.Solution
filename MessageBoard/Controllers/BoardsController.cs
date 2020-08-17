@@ -21,16 +21,11 @@ namespace MessageBoard.Controllers
     public ActionResult<IEnumerable<Board>> Get(string name)
     {
       var query = _db.Boards.AsQueryable();
-      var badRequest = _db.Boards.Where(entry => entry.BoardId == 6);
 
       if (name != null)
       {
         query = query.Where(entry => entry.Name == name);
       }
-      // if (query.Where(entry => entry.Name != name))
-      // {
-      //   return badRequest.Name;
-      // }
 
       return query.ToList();
     }
@@ -38,14 +33,18 @@ namespace MessageBoard.Controllers
     [HttpPost]
     public void Post([FromBody] Board board)
     {
-      _db.Boards.Add(board);
+      // Message associatedMessage = _db.Messages.FirstOrDefault(message => message.MessageId == messageId);
+      // board.Messages.Add(associatedMessage);
+      // _db.Boards.Add(board);
       _db.SaveChanges();
     }
 
     [HttpGet("{id}")]
     public ActionResult<Board> Get(int id)
     {
-      return _db.Boards.FirstOrDefault(entry => entry.BoardId == id);
+      Board newBoard = _db.Boards.FirstOrDefault(entry => entry.BoardId == id);
+      newBoard.Messages = _db.Messages.Where(messages => messages.BoardId == id).ToList();
+      return newBoard;
     }
 
     [HttpPut("{id}")]
