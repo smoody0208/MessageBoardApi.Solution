@@ -26,7 +26,6 @@ namespace MessageBoard.Controllers
       {
         query = query.Where(entry => entry.Name == name);
       }
-
       return query.ToList();
     }
 
