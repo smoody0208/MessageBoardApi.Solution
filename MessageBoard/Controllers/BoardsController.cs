@@ -18,9 +18,21 @@ namespace MessageBoard.Controllers
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Board>> Get()
+    public ActionResult<IEnumerable<Board>> Get(string name)
     {
-      return _db.Boards.ToList();
+      var query = _db.Boards.AsQueryable();
+      var badRequest = _db.Boards.Where(entry => entry.BoardId == 6);
+
+      if (name != null)
+      {
+        query = query.Where(entry => entry.Name == name);
+      }
+      // if (query.Where(entry => entry.Name != name))
+      // {
+      //   return badRequest.Name;
+      // }
+
+      return query.ToList();
     }
 
     [HttpPost]
