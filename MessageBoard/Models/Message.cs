@@ -14,6 +14,6 @@ namespace MessageBoard.Models
     public DateTime DatePosted { get; set; }
     public int BoardId { get; set; }
     public virtual Board Board { get; set; }
-    public int UserId { get; set; }
+    public int Id { get; set; }
   }
 }

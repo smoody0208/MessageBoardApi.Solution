@@ -8,7 +8,9 @@ namespace MessageBoard.Models
     {
     }
     public DbSet<Message> Messages { get; set; }
-    public DbSet<Board> Boards { get; set; } 
+    public DbSet<Board> Boards { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; } 
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
