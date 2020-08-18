@@ -3,14 +3,16 @@ using System;
 using MessageBoard.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MessageBoard.Migrations
 {
     [DbContext(typeof(MessageBoardContext))]
-    partial class MessageBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20200818175309_RoleAndUser")]
+    partial class RoleAndUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +71,7 @@ namespace MessageBoard.Migrations
 
             modelBuilder.Entity("MessageBoard.Models.Message", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MessageId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("BoardId");
@@ -83,55 +85,13 @@ namespace MessageBoard.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("MessageId");
+                    b.Property<int>("UserId");
 
-                    b.HasKey("Id");
+                    b.HasKey("MessageId");
 
                     b.HasIndex("BoardId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("MessageBoard.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("Password");
-
-                    b.Property<string>("Role");
-
-                    b.Property<string>("Token");
-
-                    b.Property<string>("Username");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FirstName = "Admin",
-                            LastName = "User",
-                            Password = "admin",
-                            Role = "Admin",
-                            Username = "admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FirstName = "Normal",
-                            LastName = "User",
-                            Password = "user",
-                            Role = "User",
-                            Username = "user"
-                        });
                 });
 
             modelBuilder.Entity("MessageBoard.Models.Message", b =>

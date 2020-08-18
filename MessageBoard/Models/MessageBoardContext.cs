@@ -8,10 +8,17 @@ namespace MessageBoard.Models
     {
     }
     public DbSet<Message> Messages { get; set; }
-    public DbSet<Board> Boards { get; set; } 
+    public DbSet<Board> Boards { get; set; }
+    public DbSet<User> Users { get; set; } 
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+      builder.Entity<User>()
+      .HasData(
+        new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin },
+        new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User } 
+      );
+
       builder.Entity<Board>().HasData(
         new Board { BoardId = 1, Name = "Programming", Description = "General discussions about computer programming i.e., best prectices, tips-and-trick, etc..."},
         new Board { BoardId = 2, Name = "Pets", Description = "A place where we can share cute things our pets have done"},

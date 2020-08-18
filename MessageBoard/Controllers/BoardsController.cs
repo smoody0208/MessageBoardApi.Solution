@@ -3,9 +3,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MessageBoard.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MessageBoard.Controllers
 {
+  [Authorize(Roles = Role.User)]
   [Route("api/[controller]")]
   [ApiController]
   public class BoardsController : ControllerBase
@@ -17,6 +19,7 @@ namespace MessageBoard.Controllers
       _db = db;
     }
 
+    [Authorize(Roles = Role.User)]
     [HttpGet]
     public ActionResult<IEnumerable<Board>> Get(string name)
     {
@@ -29,6 +32,7 @@ namespace MessageBoard.Controllers
       return query.ToList();
     }
 
+    [Authorize(Roles = Role.User)]
     [HttpPost]
     public void Post([FromBody] Board board)
     {
@@ -38,6 +42,7 @@ namespace MessageBoard.Controllers
       _db.SaveChanges();
     }
 
+    [Authorize(Roles = Role.User)]
     [HttpGet("{id}")]
     public ActionResult<Board> Get(int id)
     {
@@ -46,6 +51,7 @@ namespace MessageBoard.Controllers
       return newBoard;
     }
 
+    [Authorize(Roles = Role.Admin)]
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] Board board)
     {
@@ -54,6 +60,7 @@ namespace MessageBoard.Controllers
       _db.SaveChanges();
     }
 
+    [Authorize(Roles = Role.Admin)]
     [HttpDelete("{id}")]
     public void Delete(int id)
     {
