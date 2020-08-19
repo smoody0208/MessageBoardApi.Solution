@@ -3,14 +3,16 @@ using System;
 using MessageBoard.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MessageBoard.Migrations
 {
     [DbContext(typeof(MessageBoardContext))]
-    partial class MessageBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20200819204549_DataSeedingForPostMessagesUpdate")]
+    partial class DataSeedingForPostMessagesUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,9 +24,13 @@ namespace MessageBoard.Migrations
                     b.Property<int>("BoardId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.HasKey("BoardId");
 
@@ -36,30 +42,6 @@ namespace MessageBoard.Migrations
                             BoardId = 1,
                             Description = "General discussions about computer programming i.e., best prectices, tips-and-trick, etc...",
                             Name = "Programming"
-                        },
-                        new
-                        {
-                            BoardId = 2,
-                            Description = "A place where we can share cute things our pets have done",
-                            Name = "Pets"
-                        },
-                        new
-                        {
-                            BoardId = 3,
-                            Description = "Trading nutrition tips, recipes, and support",
-                            Name = "Diet/Nutrition"
-                        },
-                        new
-                        {
-                            BoardId = 4,
-                            Description = "A friendly chat about what video games we are playing these days",
-                            Name = "Video Games"
-                        },
-                        new
-                        {
-                            BoardId = 5,
-                            Description = "Best places to eat around Portland",
-                            Name = "Eats!"
                         });
                 });
 
@@ -68,11 +50,14 @@ namespace MessageBoard.Migrations
                     b.Property<int>("MessageId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Body");
+                    b.Property<string>("Body")
+                        .IsRequired();
 
                     b.Property<DateTime>("DatePosted");
 
-                    b.Property<string>("Heading");
+                    b.Property<string>("Heading")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<int>("PostId");
 
@@ -90,22 +75,6 @@ namespace MessageBoard.Migrations
                             DatePosted = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Heading = "C# Sucks!",
                             PostId = 1
-                        },
-                        new
-                        {
-                            MessageId = 2,
-                            Body = "Songs to listen to while making a database?",
-                            DatePosted = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Heading = "Databases, Databases, Databases",
-                            PostId = 1
-                        },
-                        new
-                        {
-                            MessageId = 3,
-                            Body = "Suggestions?",
-                            DatePosted = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Heading = "My Dog keeps eating trash?",
-                            PostId = 3
                         });
                 });
 
@@ -118,7 +87,8 @@ namespace MessageBoard.Migrations
 
                     b.Property<DateTime>("DatePosted");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("PostId");
 
@@ -133,20 +103,6 @@ namespace MessageBoard.Migrations
                             BoardId = 1,
                             DatePosted = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "C#"
-                        },
-                        new
-                        {
-                            PostId = 2,
-                            BoardId = 1,
-                            DatePosted = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "JavaScript"
-                        },
-                        new
-                        {
-                            PostId = 3,
-                            BoardId = 2,
-                            DatePosted = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Dogs"
                         });
                 });
 

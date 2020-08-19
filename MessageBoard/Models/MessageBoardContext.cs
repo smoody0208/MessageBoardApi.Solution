@@ -7,10 +7,10 @@ namespace MessageBoard.Models
     public MessageBoardContext(DbContextOptions<MessageBoardContext> options) : base(options)
     {
     }
-    public DbSet<Message> Messages { get; set; }
-    public DbSet<Board> Boards { get; set; }
     public DbSet<User> Users { get; set; } 
+    public DbSet<Board> Boards { get; set; }
     public DbSet<Post> Posts { get; set; }
+    // public DbSet<Message> Messages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -35,11 +35,11 @@ namespace MessageBoard.Models
         new Post { PostId = 3, BoardId = 2, Title = "Dogs" }
       );
 
-      builder.Entity<Message>().HasData(
-        new Message { MessageId = 1, PostId = 1, Heading = "C# Sucks!", Body = "JK! C# Rocks."},
-        new Message { MessageId = 2, PostId = 1, Heading = "Databases, Databases, Databases", Body = "Songs to listen to while making a database?"},
-        new Message { MessageId = 3, PostId = 3, Heading = "My Dog keeps eating trash?", Body = "Suggestions?"}
-      );
+      // builder.Entity<Message>().HasData(
+      //   new Message { MessageId = 1, PostId = 1, Heading = "C# Sucks!", Body = "JK! C# Rocks."},
+      //   new Message { MessageId = 2, PostId = 1, Heading = "Databases, Databases, Databases", Body = "Songs to listen to while making a database?"},
+      //   new Message { MessageId = 3, PostId = 3, Heading = "My Dog keeps eating trash?", Body = "Suggestions?"}
+      // );
 
     }
   }
