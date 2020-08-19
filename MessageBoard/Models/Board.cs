@@ -7,7 +7,7 @@ namespace MessageBoard.Models
   {
     public Board()
     {
-      this.Messages = new HashSet<Message>(); 
+      this.Posts = new HashSet<Post>(); 
     }
     public int BoardId { get; set; }
     [Required]
@@ -16,6 +16,6 @@ namespace MessageBoard.Models
     [Required]
     [StringLength(100)]
     public string Description { get; set; }
-    public virtual ICollection<Message> Messages { get; set; }
+    public virtual ICollection<Post> Posts { get; set; }
   }
 }

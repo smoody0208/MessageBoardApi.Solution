@@ -10,14 +10,15 @@ namespace MessageBoard.Models
     public DbSet<Message> Messages { get; set; }
     public DbSet<Board> Boards { get; set; }
     public DbSet<User> Users { get; set; } 
+    public DbSet<Post> Posts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
       builder.Entity<User>()
       .HasData(
-        new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin },
-        new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User } 
-      );
+        new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "noel", Password = "noel", Role = Role.Admin },
+        new User { Id = 2, FirstName = "Admin", LastName = "User", Username = "spencer", Password = "spencer", Role = Role.Admin },
+        new User { Id = 3, FirstName = "Admin", LastName = "User", Username = "christine", Password = "christine", Role = Role.Admin }      );
 
       builder.Entity<Board>().HasData(
         new Board { BoardId = 1, Name = "Programming", Description = "General discussions about computer programming i.e., best prectices, tips-and-trick, etc..."},

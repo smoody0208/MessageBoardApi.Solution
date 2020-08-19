@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MessageBoard.Controllers
 {
-  [Authorize(Roles = Role.User)]
+  [Authorize(Roles = Role.Admin)]
   [Route("api/[controller]")]
   [ApiController]
   public class BoardsController : ControllerBase
@@ -19,7 +19,7 @@ namespace MessageBoard.Controllers
       _db = db;
     }
 
-    [Authorize(Roles = Role.User)]
+    [Authorize(Roles = Role.Admin)]
     [HttpGet]
     public ActionResult<IEnumerable<Board>> Get(string name)
     {
@@ -32,7 +32,7 @@ namespace MessageBoard.Controllers
       return query.ToList();
     }
 
-    [Authorize(Roles = Role.User)]
+    [Authorize(Roles = Role.Admin)]
     [HttpPost]
     public void Post([FromBody] Board board)
     {
@@ -42,12 +42,12 @@ namespace MessageBoard.Controllers
       _db.SaveChanges();
     }
 
-    [Authorize(Roles = Role.User)]
+    [Authorize(Roles = Role.Admin)]
     [HttpGet("{id}")]
     public ActionResult<Board> Get(int id)
     {
       Board newBoard = _db.Boards.FirstOrDefault(entry => entry.BoardId == id);
-      newBoard.Messages = _db.Messages.Where(messages => messages.BoardId == id).ToList();
+      newBoard.Posts = _db.Posts.Where(posts => posts.PostId == id).ToList();
       return newBoard;
     }
 

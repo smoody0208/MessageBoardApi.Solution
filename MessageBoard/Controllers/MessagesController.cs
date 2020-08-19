@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MessageBoard.Controllers
 {
-  [Authorize(Roles = Role.User)]
+  [Authorize(Roles = Role.Admin)]
   [Route("api/[controller]")]
   [ApiController]
   public class MessagesController : ControllerBase
@@ -20,7 +20,7 @@ namespace MessageBoard.Controllers
       _db = db;
     }
 
-    [Authorize(Roles = Role.User)]
+    [Authorize(Roles = Role.Admin)]
     [HttpGet]
     public ActionResult<IEnumerable<Message>> Get() // DateTime date
     {
@@ -35,7 +35,7 @@ namespace MessageBoard.Controllers
       return _db.Messages.ToList();
     }
 
-    [Authorize(Roles = Role.User)]
+    [Authorize(Roles = Role.Admin)]
     [HttpPost]
     public void Post([FromBody] Message message)
     {
@@ -43,7 +43,7 @@ namespace MessageBoard.Controllers
       _db.SaveChanges();
     }
 
-    [Authorize(Roles = Role.User)]
+    [Authorize(Roles = Role.Admin)]
     [HttpGet("{id}")]
     public ActionResult<Message> Get(int id)
     {
